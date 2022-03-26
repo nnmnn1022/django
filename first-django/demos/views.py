@@ -13,17 +13,15 @@ def calculator(request) :
 
     #계산
     if operators == '+' :
-        result = num1 + num2
+        result = int(num1) + int(num2)
     elif operators == '-' :
-        result = num1 - num2
+        result = int(num1) - int(num2)
     elif operators == '*' :
-        result = num1 * num2
+        result = int(num1) * int(num2)
     elif operators == '/' :
-        result = num1 / num2
+        result = int(num1) / int(num2)
     else :
         result = 0
     
     #응답
-    
-
-    return render(request, 'calculator.html')
+    return render(request, 'calculator.html', {'result' : result})
