@@ -11,6 +11,8 @@ def calculator(request) :
     num2 = request.GET.get('num2')
     operators = request.GET.get('operators')
 
+    # print(f'request.__dict__ = {request.__dict__}')
+
     #계산
     if operators == '+' :
         result = int(num1) + int(num2)
