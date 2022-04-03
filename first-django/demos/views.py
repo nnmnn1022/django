@@ -32,18 +32,14 @@ def calculator(request) :
 
 
 def lotto(request) :
-    times = request.GET.get('times')
-    lotto_list = []
-    if times != None :
-        for i in range(int(times)) :
-            lotto_list.append(random_lotto.run())
-        return render(request, 'lotto_result.html', {
-            'times' : times,
-            'lotto_list' : lotto_list
-        })
+    
     return render(request, 'lotto_intro.html')
 
-# def lotto_result(request) :
-#     #form 에서 받아온 데이터
+def lotto_result(request) :
+    #form 에서 받아온 데이터
+    times = request.GET.get('times')
+    lotto_list = []
+    for i in range(int(times)) :
+        lotto_list.append(random_lotto.run())
 
-#     return render(request, 'lotto_result.html')
+    return render(request, 'lotto_result.html', {'times' : times, 'lotto_list' : lotto_list})
