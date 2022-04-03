@@ -1,7 +1,9 @@
+from asyncio.windows_events import NULL
 from urllib.request import Request
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.http import HttpResponse
+from demos import random_lotto
 
 # Create your views here.
 def calculator(request) :
@@ -27,3 +29,21 @@ def calculator(request) :
     
     #응답
     return render(request, 'calculator.html', {'result' : result})
+
+
+def lotto(request) :
+    times = request.GET.get('times')
+    lotto_list = []
+    if times != None :
+        for i in range(int(times)) :
+            lotto_list.append(random_lotto.run())
+        return render(request, 'lotto_result.html', {
+            'times' : times,
+            'lotto_list' : lotto_list
+        })
+    return render(request, 'lotto_intro.html')
+
+# def lotto_result(request) :
+#     #form 에서 받아온 데이터
+
+#     return render(request, 'lotto_result.html')

@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from demos.views import calculator
+from demos.views import calculator, lotto
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('calculator/', calculator),
+    path('lotto/', lotto),
 ]

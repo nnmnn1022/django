@@ -19,3 +19,6 @@ models > verbose_name은 사용자에게 보여지는 이름
 models에 데이터 베이스에 입력할 컬럼들을 명세 후
 python manage.py migrations : 준비
 python manage.py migrate : 시작
+
+
+django superuser id : admin / 12
