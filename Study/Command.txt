@@ -20,5 +20,7 @@ models에 데이터 베이스에 입력할 컬럼들을 명세 후
 python manage.py migrations : 준비
 python manage.py migrate : 시작
 
-
+python manage.py createsuperuser
 django superuser id : admin / 12
+
+for _ in range(7) >>>> 변수 값에 _를 넣으면 변수를 사용하지 않겠다는 의미

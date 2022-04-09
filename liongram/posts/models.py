@@ -9,7 +9,7 @@ class Post(models.Model) :
     content = models.TextField(verbose_name='내용')
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
     view_count = models.IntegerField(verbose_name='조회수', default=0)
-    writer = models.ForeignKey(to=User, on_delete=models.CASCADE, null=True, blank=True)
+    writer = models.ForeignKey(verbose_name='작성자', to=User, on_delete=models.CASCADE, null=True, blank=True)
 
 class Comment(models.Model) :
     content = models.TextField(verbose_name='내용')
