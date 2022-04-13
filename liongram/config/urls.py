@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from posts.views import url_prameter_view, url_view
+
+# Django에서 지원하는 변수(정규 표현식 대용인듯)
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('url/', url_view),
+    # 경로로 받기
+    path('url/<str:username>/', url_prameter_view)
 ]
