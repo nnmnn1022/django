@@ -14,14 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from posts.views import url_prameter_view, url_view
+from posts.views import class_view, function_list_view, function_view, url_prameter_view, url_view, index
 
 # Django에서 지원하는 변수(정규 표현식 대용인듯)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('url/', url_view),
     # 경로로 받기
-    path('url/<str:username>/', url_prameter_view)
+    # path('url/<str:username>/', url_prameter_view),
+    path('function_view/', function_view),
+    path('class_view/', class_view.as_view()),
+    path('function_view2/', function_list_view),
+
+    # index 페이지 연결
+    path('', index, name='index'),
+    # post 하위에 만든 urls 내용들을 모두 연결시켜주는 코드
+    path('posts/', include('posts.urls', namespace='posts')),
 ]

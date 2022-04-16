@@ -24,3 +24,17 @@ python manage.py createsuperuser
 django superuser id : admin / 12
 
 for _ in range(7) >>>> 변수 값에 _를 넣으면 변수를 사용하지 않겠다는 의미
+
+templates 폴더를 앱 안에 넣어서 사용하는 것이 아니라 더 윗단에서 관리하는 방법 :
+settings 안에 TEMPALATES 리스트가 있음 거기에 BASE_DIR / 'templates'를 넣을 것
+templates 폴더 안에는 앱명으로 폴더를 하나 생성한 후 html 파일을 넣을 것
+
+활용법 : veiws 안에서 render 할 때 (세팅에서 template 경로를 설정하였으니 templates 다음
+앱 명/html파일명 형식으로 작성
+
+앱 안에 url을 정리하는 파일을 만듦
+urls.py를 만들고 상위에 있는 urls.py처럼 모두 추가한다. (urlpatterns)
+프로젝트의 urls.py에
+from django.urls import include
+path('앱명/', include('앱명.urls')
+두 줄  코드 삽입

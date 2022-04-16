@@ -2,7 +2,7 @@ from tabnanny import verbose
 from django.contrib import admin
 from .models import Post, Comment
 
-# 본인이 만든 모델을 admin에서 볼 수 있도록 추가
+
 
 class CommentInline(admin.TabularInline):
     model = Comment
@@ -14,7 +14,7 @@ class CommentInline(admin.TabularInline):
     min_num = 0
     # max_num = 5
 
-
+# 본인이 만든 모델을 admin에서 볼 수 있도록 추가
 # admin.site.register(app) 가 아닌 @admin.register(app)으로 대체
 @admin.register(Post)
 class PostModelAdmin(admin.ModelAdmin): 

@@ -1,0 +1,8 @@
+ERRORS:
+support.Faq.modifier: (fields.E304) Reverse accessor for 'support.Faq.modifier' clashes with reverse accessor for 'support.Faq.writer'.
+        HINT: Add or change a related_name argument to the definition for 'support.Faq.modifier' or 'support.Faq.writer'.
+support.Faq.writer: (fields.E304) Reverse accessor for 'support.Faq.writer' clashes with reverse accessor for 'support.Faq.modifier'.
+        HINT: Add or change a related_name argument to the definition for 'support.Faq.writer' or 'support.Faq.modifier'.
+		
+>> 해결 방법 : foreign key가 두 개일 때 특히나 참고하는 내용이 비슷할 때
+아마도 참고할만한 related_name 지정이 필요한 것 같음
