@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} FAQ {% endblock %}
+{% block content %}
+
+<a href="{% url 'support:faq_list' %}">게시글 목록</a>
+<h1>FAQ</h1>
+<form>
+    <P>질문사항 <input type="text" name="title"></P>
+</form>
+
+{% endblock %}

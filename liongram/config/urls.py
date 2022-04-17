@@ -32,4 +32,5 @@ urlpatterns = [
     path('', index, name='index'),
     # post 하위에 만든 urls 내용들을 모두 연결시켜주는 코드
     path('posts/', include('posts.urls', namespace='posts')),
+    path('support/', include('support.urls', namespace='support')),
 ]

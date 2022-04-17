@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} FAQ {% endblock %}
+{% block content %}
+
+    <h1>질문하기</h1>
+    <p><a href="{% url 'support:faq_list' %}">목록</a></p>
+    <form action="{% url 'support:faq_detail' %}" method="Post">
+        {% csrf_token %}
+        <!-- <P>제목 |</P> <p><input type="text" name="FAQ_title" size="64"></P> -->
+        카테고리 : 
+        <select name="choices">
+            <option value="GEN">일반</option>
+            <option value="ACC">계정</option>
+            <option value="ETC">기타</option>
+        </select>
+        
+        <P>질문 |</P> <p><textarea name="FAQ_question" cols="64" rows="5"></textarea></P>
+        <P>답변 |</P> <p><textarea name="FAQ_answer" cols="64" rows="5"></textarea></P>
+
+        <input type="submit" value="등록">
+
+    </form>
+
+{% endblock %}
