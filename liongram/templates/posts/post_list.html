@@ -3,5 +3,17 @@
 {% block content %}
 
 <h1>Post 목록 화면</h1>
+<p><a href="{% url 'posts:post-create' %}">생성</a></p>
+
+{% for post in post_list %}
+    <div>
+        {{post}}
+        <p>&emsp;id : {{post.id}}</p>
+        <p>&emsp;image : {{post.image}}</p>
+        <p>&emsp;내용 : {{post.content}}</p>
+        <p>&emsp;작성일시 : {{post.created_at}}</p>
+        <p>&emsp;작성자 : {{post.writer}}</p>
+    </div>
+{% endfor %}
 
 {% endblock %}

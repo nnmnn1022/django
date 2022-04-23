@@ -17,7 +17,7 @@ python manage.py runserver
 models > verbose_name은 사용자에게 보여지는 이름
 
 models에 데이터 베이스에 입력할 컬럼들을 명세 후
-python manage.py migrations : 준비
+python manage.py makemigrations : 준비
 python manage.py migrate : 시작
 
 python manage.py createsuperuser
@@ -38,3 +38,17 @@ urls.py를 만들고 상위에 있는 urls.py처럼 모두 추가한다. (urlpat
 from django.urls import include
 path('앱명/', include('앱명.urls')
 두 줄  코드 삽입
+
+04/21
+이미지를 html form 태그로 보낼 때는 인코딩이 필요함
+데이터를 어떤 형식으로 보낼 것인지에 대한 내용
+
+settings.py
+Static : 서버에서 업로드
+media : 사용자들이 업로드
+
+settings의 내용을 가져오는 코드
+from django.conf import settings
+
+장고 디버그 툴바
+https://django-debug-toolbar.readthedocs.io/en/latest/

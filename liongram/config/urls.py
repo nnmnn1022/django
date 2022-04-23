@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# settings의 내용을 가져오는 코드
+from django.conf import settings
+from django.conf.urls.static import static
 
 from posts.views import class_view, function_list_view, function_view, url_prameter_view, url_view, index
 
@@ -33,4 +36,7 @@ urlpatterns = [
     # post 하위에 만든 urls 내용들을 모두 연결시켜주는 코드
     path('posts/', include('posts.urls', namespace='posts')),
     path('support/', include('support.urls', namespace='support')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

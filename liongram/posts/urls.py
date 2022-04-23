@@ -8,7 +8,7 @@ app_name = 'posts'
 
 urlpatterns = [
     path('', post_list_view, name='post_list'),
-    path('new/', post_create_view),
+    path('create/', post_create_view, name='post-create'),
     # Django에서 지원하는 변수(정규 표현식 대용인듯)
     path('<int:id>', post_detail_view),
     path('<int:id>/edit/', post_update_view),

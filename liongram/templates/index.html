@@ -3,8 +3,15 @@
 {% block content %}
 
 <h1>인덱스 화면</h1>
-<ul>
+<!-- <ul>
     <li><a href="{% url 'posts:post_list' %}">게시글 목록</a></li>
     <li><a href="{% url 'support:faq_list' %}">FAQ</a></li>
-</ul>
+</ul> -->
+<main>
+    <div class="card-list">
+        {% for post in post_list %}
+            {% include 'mixin/posts/post_card.html' %}
+        {% endfor %}
+    </div>
+</main>
 {% endblock %}
