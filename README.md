@@ -1,5 +1,6 @@
 # django_mission_03-nnmnn1022
 
+## Basic
 - 고객센터(`support`) 앱의 자주묻는질문(`Faq`), 1:1문의(`Inquiry`), 답변(`Answer`) 관리자 페이지 등록
     - 자주묻는질문(`Faq`)
         - 목록페이지 출력 필드 : 제목, 카테고리, 최종 수정 일시
@@ -15,7 +16,7 @@
 
 https://user-images.githubusercontent.com/41253926/166137694-11f9667c-4038-47c1-8acd-f9d7d7a556b1.mp4
 
-
+## Challenge
 - 1:1문의(`Inquiry`) 모델의 “상태” 필드 추가
     - 상태 : 문의 등록, 접수 완료, 답변 완료
 - 1:1문의(`Inquiry`) 목록, 필터에 상태 추가
