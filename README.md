@@ -1,10 +1,18 @@
-# django_mission_02-nnmnn1022
-django_mission_02-nnmnn1022 created by GitHub Classroom
-(동영상 중간에 드롭다운이 출력되지 않아 따로 이미지로 첨부합니다.)
+# django_mission_03-nnmnn1022
 
-https://user-images.githubusercontent.com/41253926/163722682-ece0991f-39e1-4d2b-a1f5-eb60a6aff6c9.mp4
+- 고객센터(`support`) 앱의 자주묻는질문(`Faq`), 1:1문의(`Inquiry`), 답변(`Answer`) 관리자 페이지 등록
+    - 자주묻는질문(`Faq`)
+        - 목록페이지 출력 필드 : 제목, 카테고리, 최종 수정 일시
+        - 검색 필드 : 제목
+        - 필터 필드 : 카테고리
+    - 1:1문의(`Inquiry`)
+        - 목록페이지 출력 필드 : 질문 제목, 카테고리, 생성 일시, 생성자
+        - 검색 필드 : 제목, 이메일, 전화번호
+        - 필터 필드 : 카테고리
+        - 인라인모델 : 답변(`Answer`)
+    - 답변(`Answer`)
+        - 1:1문의 모델에 인라인모델로 추가
 
-![image](https://user-images.githubusercontent.com/41253926/163722130-83f22d6b-6537-4761-9b94-1f7d47641831.png)
-
+https://user-images.githubusercontent.com/41253926/166137694-11f9667c-4038-47c1-8acd-f9d7d7a556b1.mp4
 
 
