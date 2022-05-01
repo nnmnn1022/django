@@ -1,12 +1,9 @@
-from email.mime import image
-from pyexpat import model
-from webbrowser import get
-import django
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404 # 가져오거나 오류를 만든다
+from django.http import Http404, HttpResponse, JsonResponse
 from django.views.generic import ListView
-from .models import Post, User
+from .models import Post
 from django.contrib.auth.decorators import login_required
+from .forms import PostBaseForm, PostCreateForm, PostDetailForm
 
 # Create your views here.
 def index(request):
@@ -27,19 +24,26 @@ def post_list_view(request):
     return render(request, 'posts/post_list.html', context)
 
 def post_detail_view(request, id):
-    return render(request, 'posts/post_detail.html')
+    try :
+        post = Post.objects.get(id=id)
+
+    except Post.DoesNotExist:
+        return redirect('index')
+    context = {
+        'post' : post,
+        # 'form' : PostDetailForm(),
+    }
+    return render(request, 'posts/post_detail.html', context)
 
 # 로그인을 했을 때만 처리하는 함수라는 어노테이션
 @login_required
 def post_create_view(request):
-    # get으로 들어온 것만 폼을 보여주게 함
+    # get으로 들어오면 폼을 보여주게 함
     if request.method == 'GET' :
         return render(request, 'posts/post_form.html')
     else :
         image = request.FILES.get('image')
         content = request.POST.get('content')
-        print(image)
-        print(content)
         Post.objects.create(
             image = image,
             content = content,
@@ -47,13 +51,72 @@ def post_create_view(request):
         )
         return redirect('index')
 
+
+def post_create_form_view(request):
+    # get으로 들어오면 폼을 보여주게 함
+    if request.method == 'GET' :
+        # 양식 제공
+        form = PostCreateForm()
+        context = {
+            'form' : form
+        }
+        return render(request, 'posts/post_form_2.html', context)
+    else :
+        # 양식 제공이 아니라 값을 줘야되니까 Form에 데이터 넣어줌
+        form = PostCreateForm(request.POST, request.FILES)
+        
+        # image = request.FILES.get('image')
+        # content = request.POST.get('content')
+
+        # 유효성 검사를 해서 form 기반 제대로된 정보인지 확인 후 데이터 저장
+        if form.is_valid() :
+            Post.objects.create(
+                image = form.cleaned_data['image'],
+                content = form.cleaned_data['content'],
+                writer = request.user
+            )
+        else :
+            return redirect('posts:post-create')
+        return redirect('index')
+
     
-
+@login_required
 def post_update_view(request, id):
-    return render(request, 'posts/post_form.html')
+    # 아래 코드로 우측 코드를 대체할 수 있음 post = Post.objects.get(id=id)
+    # 위 코드에서 does not exist Error가 났을 때 자동으로 404로 돌려주는 코드
+    post = get_object_or_404(Post,id=id, writer=request.user)
+    # if request.user != post.writer:
+    #     raise Http404('잘못된 접근입니다.')
+    if request.method == 'GET' :
+        context = {
+            'post' : post
+        }
+        return render(request, 'posts/post_form.html', context)
+    elif request.method == 'POST':
+        image = request.FILES.get('image')
+        content = request.POST.get('content')
 
+        if image :
+            post.image.delete()
+            post.image = image
+        post.content = content
+        post.save()
+        return redirect('posts:post-detail', post.id )
+
+@login_required
 def post_delete_view(request, id):
-    return render(request, 'posts/post_confirm_delete.html')
+    post = get_object_or_404(Post,id=id, writer=request.user)
+    # if request.user != post.writer:
+    #     raise Http404('잘못된 접근입니다.')
+    if request.method == 'GET' :
+        context = {
+            'post' : post
+        }
+        return render(request, 'posts/post_confirm_delete.html', context)
+    else :
+        post.delete()
+        return render(request, 'index')
+    
 
 def url_view(request):
     print('url_view()')

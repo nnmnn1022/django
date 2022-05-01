@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'posts',
     'support',
     'debug_toolbar',
+    'config'
 ]
 
 MIDDLEWARE = [

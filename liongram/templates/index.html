@@ -10,7 +10,7 @@
 <main>
     <div class="card-list">
         {% for post in post_list %}
-            {% include 'mixin/posts/post_card.html' %}
+            {% include 'mixin/posts/post_card.html' with detail=False %}
         {% endfor %}
     </div>
 </main>

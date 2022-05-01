@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} 입력 {% endblock %}
+{% block content %}
+
+<h1>Post 입력 화면</h1>
+<!-- POST + 파일 업로드 시 지정해줘야 하는 enctype : 인코딩 타입  -->
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <!-- 해당 폼을 p태그로 넣겠다. -->
+    <div>{{ form.as_p }}</div>
+    
+    {# <div>{{ form.as_ul }}</div> #}
+    {# <div>{{ form.as_table }}</div> #}
+    <div>
+        {# {% for field in form %} #}
+            {# {{ field }} #}
+        {# {% endfor %} #}
+    </div> 
+
+    <div>
+        <input type="submit">
+    </div>
+
+</form>
+
+{% endblock %}
