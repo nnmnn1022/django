@@ -32,11 +32,24 @@ class Inquiry(BaseModel):
         GENERAL = 'GEN', _('General issue')
         ACCOUNT = 'ACC', _('Account issue')
         ETC = 'ETC', _('etc.')
+
+    class Status(models.TextChoices):
+        REGISTED = 'REG', _('문의 등록')
+        CHECKING = 'CHE', _('접수 완료')
+        COMPLETE = 'COM', _('답변 완료')
+        NOTIFIED = 'NOT', _('알림 완료')
+
     category = models.CharField(max_length=3,
         choices=Category.choices,
         default=Category.GENERAL)
+    
+
 
     title = models.CharField(verbose_name='질문 제목', max_length=64)
+    status = models.CharField(max_length=3,
+        choices=Status.choices,
+        default=Status.REGISTED
+    )
     email = models.EmailField(verbose_name='e-mail')
     email_checkbox = models.BooleanField(verbose_name='e-mail로 답변을 받겠습니다.')
 
