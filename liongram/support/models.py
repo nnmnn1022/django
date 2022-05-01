@@ -44,7 +44,7 @@ class Inquiry(BaseModel):
     phone_checkbox = models.BooleanField(verbose_name='문자메시지로 답변을 받겠습니다.')
     detail = models.TextField(verbose_name='내용')
 
-    image = models.ImageField(verbose_name='이미지', upload_to='media/', blank=True, null=True)
+    image = models.ImageField(verbose_name='이미지', blank=True, null=True)
     dateTimeOfUpload = models.DateTimeField(auto_now = True)
     created_by = models.ForeignKey(to=User, verbose_name='작성자', on_delete=models.CASCADE, related_name='inquiry_creater', blank=True, null=True)
     last_modified_by = models.ForeignKey(to=User, verbose_name='수정자', on_delete=models.CASCADE, related_name='inquiry_last_modifier', blank=True, null=True)
