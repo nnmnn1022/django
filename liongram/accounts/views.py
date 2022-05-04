@@ -65,3 +65,12 @@ def login_view(request) :
         # pass # 응답
 
         # user = User.objects.get(username=username)
+
+def logout_view(request) :
+    # 데이터 유효성 검사
+    if request.user.is_authenticated :
+        # 비즈니스 로직 처리 - 로그아웃
+        logout(request)
+    
+    # 응답
+    return redirect('index')

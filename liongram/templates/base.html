@@ -12,9 +12,14 @@
 <body class="container">
     
         {% if request.user.is_authenticated %}
-            <span class="#">{{ request.user.username }} 님 </span>
+            <span class="#">안녕하세요 {{ request.user.username }} 님 
+            <a href="{% url 'accounts:logout' %}"> 로그아웃</a>
+            </span>
         {% else %}
-            <span class="#">Guest 모드 </span>
+            <span class="#">Guest 모드 입니다.
+            <a href="{% url 'accounts:login' %}"> 로그인</a>
+            <a href="{% url 'accounts:signup' %}"> 회원가입</a>
+            </span>
         {% endif %}
     
 <div>
