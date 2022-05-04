@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'posts',
     'support',
     'debug_toolbar',
-    'config'
+    'config',
+    'users',
+    'phonenumbers',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -139,3 +142,5 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+AUTH_USER_MODEL = 'users.User'

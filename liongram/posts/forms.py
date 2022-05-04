@@ -31,6 +31,8 @@ class PostCreateForm(PostBaseForm):
         data = self.cleaned_data['content']
         if '비속어' == data :
             raise ValidationError('\'비속어\'는 사용하실 수 없습니다.')
+        
+        return data
 
 class PostUpdateForm(PostBaseForm):
     class Meta(PostBaseForm.Meta):

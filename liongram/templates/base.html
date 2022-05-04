@@ -10,6 +10,13 @@
     {% block css %}{% endblock %}
 </head>
 <body class="container">
+    
+        {% if request.user.is_authenticated %}
+            <span class="#">{{ request.user.username }} 님 </span>
+        {% else %}
+            <span class="#">Guest 모드 </span>
+        {% endif %}
+    
 <div>
     {% block content %}
     {% endblock %}

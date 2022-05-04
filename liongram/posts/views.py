@@ -115,7 +115,7 @@ def post_delete_view(request, id):
         return render(request, 'posts/post_confirm_delete.html', context)
     else :
         post.delete()
-        return render(request, 'index')
+        return redirect('index')
     
 
 def url_view(request):
