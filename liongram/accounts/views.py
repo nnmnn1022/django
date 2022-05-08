@@ -14,7 +14,7 @@ def signup_view(request) :
 
     # Post 요청 시 데이터 확인 후 회원 생성
     else :
-        form = UserSignupForm(request.POST)
+        form = UserSignupForm(request.POST, request.FILES)
         try :
             if form.is_valid :
                 # 회원가입 처리

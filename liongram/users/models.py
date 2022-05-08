@@ -26,6 +26,7 @@ class UserManager(DjangoUserManager) :
 
 class User(AbstractUser) :
     phone = models.CharField(verbose_name='전화번호', max_length=11)
+    profile_image = models.ImageField(verbose_name='프로필 사진', blank=True, null=True)
     # 우리가 커스터마이징한 usermanager 모델을 연결
     objects = UserManager()
 

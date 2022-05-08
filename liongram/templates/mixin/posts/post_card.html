@@ -1,7 +1,13 @@
 {% load static %}
 <div class="card">
     <div class="card__header">
-        <img class="card__user-image" src="http://via.placeholder.com/32x32"/>
+        <div class = card__user-image>
+            {% if post.writer.profile_image != Null %}
+                <img class="card__user-image" src="{{ post.writer.profile_image }}"/>
+            {% else %}
+                <img class="card__user-image" src="http://via.placeholder.com/32x32"/>
+            {% endif %}
+        </div>
         <a href="#">
             <!-- index 의 for문에서 돌아가고 있는 변수 post를 가져다 쓸 수 있음 -->
             <span class="card__user-name">{{ post.writer }}</span>

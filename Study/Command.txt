@@ -64,3 +64,12 @@ model을 하면 빼놓을 수 없는 manager,
 쿼리셋 api를 저장하고 있는 것, 
 
 clean_OOO : OOO에 대한 유효성 검사
+
+middleware : view 에서  요청을 하면 그 때 실행되는 무언가
+
+0505 study
+Static 폴더 : 관리자가 필요해서 올린 파일
+media 폴더 : 사용자가 올린 파일
+
+AJAX : 비동기 데이터 보낼 때 // instagram / facebook
+SPA : single page aplication // vue.js / react

@@ -18,6 +18,6 @@ class UserBaseForm(forms.ModelForm) :
 class UserSignupForm(UserCreationForm) :
     class Meta(UserCreationForm.Meta) :
         model = get_user_model()
-        fields = ['username', 'email']
+        fields = ['username', 'email', 'profile_image']
 
 
