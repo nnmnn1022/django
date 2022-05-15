@@ -4,10 +4,24 @@ from rest_framework.response import Response
 from posts.serailizers import (PostBaseModelSerializer, PostListModelSerializer, PostCreateModelSerializer, CommentHyperlinkModelSerializer, PostRetrieveModelSerializer, CommentListModelSerializer)
 from .models import Post, Comment
 from rest_framework import generics, status
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 
 class PostModelViewSet(ModelViewSet) :
     queryset = Post.objects.all()
     serializer_class = PostListModelSerializer
+
+    def get_permissions(self):
+        permission_classes = []
+        action = self.action
+        
+        if action == 'list' :
+            permission_classes = [AllowAny]
+        elif action in ['create', 'retrieve']  :
+            permission_classes = [IsAuthenticated]
+        elif action == ['update', 'partial_update', 'destroy']  :
+            permission_classes = [IsAdminUser]
+
+        return [permission() for permission in permission_classes]
 
     @action(detail=True, methods=['get'])
     def get_comment_all(self, request, pk=None) :
