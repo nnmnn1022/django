@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'posts',
     'rest_framework.authtoken',
-    'corsheaders', # cors(Cross Origin Resource Sharing) 사용, 도메인 또는 포트가 다른 서버의 자원을 요청하는 매커니즘   
+    'corsheaders', # cors(Cross Origin Resource Sharing) 사용, 도메인 또는 포트가 다른 서버의 자원을 요청하는 매커니즘
+    'drf_yasg',
 
 ]
 
