@@ -28,7 +28,6 @@ def get_secret(setting, secrets_dict=secrets):
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_secret('SECRET_KEY')
-print(f'SECRET_KEY = {get_secret("SECRET_KEY")}')
 
 # Application definition
 DJANGO_APPS = [
@@ -62,7 +61,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
