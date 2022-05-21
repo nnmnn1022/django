@@ -23,7 +23,7 @@ def get_secret(setting, secrets_dict=secrets):
     try :
         return secrets_dict[setting]
     except KeyError :
-        error_msg = f'Set th {setting} environment variable'
+        error_msg = f'Set the {setting} environment variable'
         raise ImproperlyConfigured(error_msg)
 
 # SECURITY WARNING: keep the secret key used in production secret!
