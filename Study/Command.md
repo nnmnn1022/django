@@ -1,26 +1,51 @@
-일단 먼저 가상환경 설정
+### 가상환경 설정
+---
+```
 python -m  venv venv(이름)
 pip install --upgrade pip
+```
 
-장고 프로젝트 생성
-django-admin startproject config .
+---
 
-포스트 클래스 생성 (앱은 복수형으로 만들어야 해서 posts)
-django-admin startapp posts
+## Django
+---
+##### 프로젝트 생성
+`django-admin startproject config .`
 
-app을 추가하면 반드시 해야 하는 일
-config/settings.py > installed_apps에 app 명을 그대로 추가
 
-manager.py 실행 (서버 실행)
-python manage.py runserver
+##### 앱 생성 (앱은 복수형으로 만들어야 해서 posts)
+`django-admin startapp __your_app_name__`
 
-models > verbose_name은 사용자에게 보여지는 이름
 
-models에 데이터 베이스에 입력할 컬럼들을 명세 후
-python manage.py makemigrations : 준비
-python manage.py migrate : 시작
+##### app을 추가하면 반드시 해야 하는 일
+`config/settings.py > INSTTALLED_APPS`에 app 명을 그대로 추가
 
-python manage.py createsuperuser
+##### manager.py 실행 (서버 실행)
+`python manage.py runserver`
+
+##### migrations
+###### models에 데이터 베이스에 입력할 컬럼들을 명세 후
+
+`python manage.py makemigrations`
+모델 생성이나 변경 후 마이그레이트 준비
+
+`python manage.py migrate`
+준비 후 마이그레이션 실행
+
+---
+##### 관리자 만들기
+`python manage.py createsuperuser`
+
+
+
+---
+### Models
+---
+##### 
+> models > verbose_name은 admin 사용자에게 보여지는 이름
+
+
+
 django superuser id : admin / 12
 
 for _ in range(7) >>>> 변수 값에 _를 넣으면 변수를 사용하지 않겠다는 의미
@@ -42,6 +67,7 @@ path('앱명/', include('앱명.urls')
 04/21
 이미지를 html form 태그로 보낼 때는 인코딩이 필요함
 데이터를 어떤 형식으로 보낼 것인지에 대한 내용
+enctype="multipart/form-data"
 
 settings.py
 Static : 서버에서 업로드
