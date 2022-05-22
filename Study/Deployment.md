@@ -14,9 +14,11 @@
 - 시크릿 키는 절대 유출하면 안 됨.
 (현재는 settings.py로 넣어뒀는데, 따로 관리하게 됨.)
 - Session, 암호화 서명 등에서 사용
+- 후에 config 안에 settings 패키지를 만들어서 base/deployment/local/production 으로 나누어 base + @ 를 실행시키도록 환경 구성
 
 ##### DEBUG
 - 소스 코드, 로컬 변수, 설정 등이 유출되기 때문에 **Debug = False**로 처리하는 것이 기본 (대외비)
+- deploy 환경에서는 False
 
 ##### DATABASE
 - 개발환경의 데이터 베이스, 실제 데이터 베이스 등이 나눠져 있게 됨.
@@ -98,6 +100,9 @@ fi
 ```
 > 맨 아래에 위 내용을 추가하고, :wq를 눌러 저장하고 종료
 
+`export DJANGO_SETTINGS_MODULE="config.settings.production"`
+> 위 코드를 통해 settings 폴더 안의 production을 기본 경로로 하도록 하기
+
 ##### github에 업로드한 내용 서버에서 구동하기.
 
 - `ssh-keygen` : 나오는 것들은 엔터 눌러서 마무리.
@@ -108,3 +113,36 @@ fi
 - `python -m venv venv` : 가상환경 설치
 - `source venv/bin/activate` : 윈도우와는 다르게 venv/bin/activate를 실행시켜줘야 함.
 - `pip install -r requirements.txt` pip freeze로 저장했던 requirements들을 한 번에 다운로드 함.
+- `sudo vi /etc/systemd/system/gunicorn.service` 로 시스템에 아래 내용의 파일 만들기 (서비스를 실행시키기 위한 파일)
+```
+[Unit]
+Description=gunicorn deamon
+Requires=gunicorn.socket:
+After=network.target
+
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/django/liongram/
+ExecStart=/home/ubuntu/django/liongram/venv/bin/gunicorn \
+--access-logfile \
+--workers 3 \
+--bind unix:/run/gunicorn.sock \
+config.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+```
+- 통신을 위한 소켓 열기 `sudo vi /etc/systemd/system/gunicorn/socket:` 에 아래 내용 추가
+```
+[Unit]
+Description=gunicornsocket
+
+[Socket]
+ListenStream=/run/gunicorn.sock
+SocketUser=ubuntu
+
+[Install]
+WantedBy=sockets.target
+```
+- 이후 `sudo systemctl start gunicorn` / `sudo systemctl status gunicorn`
