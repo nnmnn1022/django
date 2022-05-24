@@ -28,4 +28,4 @@ DATABASES = {
 
 # Static files (CSS, JavaScript, Images)
 # 배포 시에는 STATICFILES_DIR 이 아닌 static root를 사용
-STATIC_ROOT = BASE_DIR / 'static',
+STATIC_ROOT = BASE_DIR / 'static'

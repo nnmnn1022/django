@@ -83,8 +83,9 @@
 ##### Python 설치
 - 파이썬을 사용하기 위한 제반 프로그램 설치
 ```
-sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncu
-rsesw5-dev \xz-utils tk-dev
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+xz-utils tk-dev
 ```
 - pyenv 설치 : python 버전 관리를 용이하게 하기 위한 프로그램
 `git clone https://github.com/pyenv/pyenv.git ~/.pyenv`
@@ -145,4 +146,34 @@ SocketUser=ubuntu
 [Install]
 WantedBy=sockets.target
 ```
-- 이후 `sudo systemctl start gunicorn` / `sudo systemctl status gunicorn`
+- 이후 `sudo systemctl start gunicorn` / `sudo systemctl status gunicorn` 로 오류가 있을 경우 확인 가능
+- `sudo journalctl -u guunicorn.service`
+
+- gunicorn 프로세스 확인 : `ps -ef | grep gunicorn`
+
+##### nginx gunicorn 설정
+`sudo vi /etc/nginx/conf.d/__project_name__.conf` : nginx 안에 파일 작성
+`sudo nginx -t` : nginx 문법 확인 코드
+
+```
+server{
+    listen80;
+
+    server_name 52.79.97.19;
+
+    location/{
+        proxy_passhttp://unix:/run/gunicorn.sock;
+        }
+
+    location/static/{
+        autoindexon;
+        alias/home/ubuntu/__your_project__/static/;
+    }
+
+    location/media/{
+        autoindexon;
+        alias/home/ubuntu/__your_project__/media/;
+    }
+}
+```
+설정 완료 후 `sudo systemctl restart nginx`
