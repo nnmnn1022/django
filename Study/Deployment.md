@@ -105,6 +105,7 @@ fi
 > 위 코드를 통해 settings 폴더 안의 production을 기본 경로로 하도록 하기
 
 ##### github에 업로드한 내용 서버에서 구동하기.
+###### 주의! 코드를 수정하고 나면 gunicorn을 재실행 시켜줘야 함
 
 - `ssh-keygen` : 나오는 것들은 엔터 눌러서 마무리.
 - `cat .ssh/id_rsa.pub` : 키 값 읽기
@@ -176,4 +177,95 @@ server{
     }
 }
 ```
-설정 완료 후 `sudo systemctl restart nginx`
+- 설정 완료 후 `sudo systemctl restart nginx`
+
+##### Static 파일 취합 / Media 폴더 생성
+- `python manage.py collectstatic` : static 파일 취합
+- `mkdir media` : 미디어 폴더 만들기
+
+##### production.py 에 추가 요망
+```
+STATIC_ROOT = BASE_DIR / 'static'
+
+LOG_FILE = '/home/ubuntu/liongram/log/django.log'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'logfile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': LOG_FILE,
+            'when': "midnight",  # 매 자정마다
+            'backupCount': 31,
+            'formatter': 'standard',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard'
+        },
+    },
+    # Loggers (where does the log come from)
+    'loggers': {
+        'repackager': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['console', 'logfile'],
+            'propagate': True,
+            'level': 'WARN',
+        },
+        'django.server': {
+            'handlers': ['console', 'logfile'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django.db.backends': {
+            'handlers': ['console', 'logfile'],
+            'level': 'WARN',
+            'propagate': False,
+        },
+        '': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'gunicorn.error': {
+            'level': 'INFO',
+            'handlers': ['logfile'],
+            'propagate': True,
+        },
+        'gunicorn.access': {
+            'level': 'INFO',
+            'handlers': ['logfile'],
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['logfile'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    }
+}
+```
