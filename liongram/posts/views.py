@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404 # 가져오거�
 from django.http import Http404, HttpResponse, JsonResponse
 from django.views.generic import ListView
 from .models import Post
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from .forms import PostBaseForm, PostCreateForm, PostDetailForm
+User = get_user_model()
 
 # Create your views here.
 def index(request):
@@ -12,6 +14,7 @@ def index(request):
         'post_list' : post_list,
     }
     return render(request, 'index.html', context)
+
 
 def post_list_view(request):
     post_list = Post.objects.all()

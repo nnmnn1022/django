@@ -11,18 +11,24 @@
     {% block css %}{% endblock %}
 </head>
 <body class="container">
-    
-        {% if request.user.is_authenticated %}
-            <span class="#">안녕하세요 {{ request.user.username }} 님 
-            <a href="{% url 'accounts:logout' %}"> 로그아웃</a>
-            </span>
-        {% else %}
-            <span class="#">Guest 모드 입니다.
-            <a href="{% url 'accounts:login' %}"> 로그인</a>
-            <a href="{% url 'accounts:signup' %}"> 회원가입</a>
-            </span>
-        {% endif %}
-    
+    <div>
+        <nav>
+            <ul class="top-menu-group">
+                {% if request.user.is_authenticated %}
+                    <li>안녕하세요 {{ request.user.username }} 님 
+                    <li><a href="{% url 'accounts:logout' %}"> 로그아웃</a></li>
+                    
+                {% else %}
+                    Guest 모드 입니다.
+                    <li><a href="{% url 'accounts:login' %}"> 로그인</a></li>
+                    <li><a href="{% url 'accounts:signup' %}"> 회원가입</a></li>
+                    
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <br>
+    <br>
 <div>
     {% block content %}
     {% endblock %}

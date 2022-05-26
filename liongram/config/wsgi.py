@@ -11,6 +11,8 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+# 배포 / 개발 시에 바꿔줘야 하는 부분
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.production')
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.development')
 
 application = get_wsgi_application()

@@ -10,7 +10,7 @@
         </div>
         <a href="#">
             <!-- index 의 for문에서 돌아가고 있는 변수 post를 가져다 쓸 수 있음 -->
-            <span class="card__user-name">{{ post.writer }}</span>
+            <span class="card__user-name">&nbsp; {{ post.writer }}</span>
         </a>
         <!-- 현재 접속한 사람과 작성자가 같은 경우만 수정가능 -->
         {% if request.user == post.writer %}

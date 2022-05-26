@@ -33,10 +33,12 @@ urlpatterns = [
 
     # index 페이지 연결
     path('', index, name='index'),
-    # post 하위에 만든 urls 내용들을 모두 연결시켜주는 코드
+    # liongram 하위에 만든 urls 내용들을 모두 연결시켜주는 코드
     path('posts/', include('posts.urls', namespace='posts')),
     path('support/', include('support.urls', namespace='support')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
+    # 배포 시 주석 처리
+    path('__debug__/', include('debug_toolbar.urls')),  
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -20,6 +20,15 @@ a {
 
 a:link { text-decoration: none; text-shadow: 0 0 24px; } a:visited { text-decoration: none; text-shadow: 0 0 24px; }
 
+p {
+    margin : 15px;
+}
+
+.right {
+    float: right;
+    margin : 10px
+}
+
 /* Font */
 .material-icons.md-18 {
     font-size: 18px;
@@ -37,11 +46,27 @@ a:link { text-decoration: none; text-shadow: 0 0 24px; } a:visited { text-decora
     font-size: 48px;
 }
 
+/* Top Menu */
+.top-menu-group {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    max-width: 425px;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #FFFFFF;
+    list-style: None;
+    padding-left: 0px;
+    position: fixed;
+    top: 0%
+}
+
 /* Bottom Menu */
 .bottom-menu-group {
     display: flex;
     height: 60px;
-    width: 426px;
+    width: 100%;
+    max-width: 425px;
     align-items: center;
     justify-content: space-around;
     background-color: #FFFFFF;
@@ -54,14 +79,14 @@ a:link { text-decoration: none; text-shadow: 0 0 24px; } a:visited { text-decora
 
 /* Card */
 .card-list {
-    margin: 10px 0;
+    margin: 0px 0;
     background-color: #FFFFFF;
 }
 
 .card__header {
     display: flex;
     align-items: center;
-    margin: 15px 0;
+    margin: 25px 0;
     padding: 0 5px;
 }
 

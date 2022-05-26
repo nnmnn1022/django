@@ -19,6 +19,11 @@ THIRD_PARTY_APPS += [
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
+HEADMIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
+]
+
+MIDDLEWARE = HEADMIDDLEWARE + MIDDLEWARE
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
