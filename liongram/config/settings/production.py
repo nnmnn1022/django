@@ -30,7 +30,7 @@ DATABASES = {
 # 배포 시에는 STATICFILES_DIR 이 아닌 static root를 사용
 STATIC_ROOT = BASE_DIR / 'static'
 
-LOG_FILE = '/home/ubuntu/liongram/log/django.log'
+LOG_FILE = '/home/ubuntu/django/liongram/log/django.log'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
