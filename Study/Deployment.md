@@ -64,6 +64,11 @@
 - `clear` : 창 지우기
 - `sudo locale-gen ko_KR.UTF-8` : 지역, 언어 설정
 - `sudo dpkg-reconfigure tzdata`, `Asia/Seoul` : 시간대 설정
+- `echo $LANG` : 언어 확인
+- `sudo apt-get install language-pack-ko` : 한국어 패키지 다운로드
+- `sudo locale-gen ko_KR.UTF-8` : 설치
+- `sudo dpkg-reconfigure locales` : 설정
+- `export LANGUAGE=ko_KR.UTF-8`, `export LANG=ko_KR.UTF-8` : 환경변수 설정
 
 
 ###### AWS 위에 서버를 설치한 후 Public IP를 사용해 접속하면 접속이 되어야 하는데, 처음에는 보안 설정을 먼저 진행해 줘야 함.

@@ -19,7 +19,10 @@ def signup_view(request) :
             if form.is_valid :
                 # 회원가입 처리
                 instance = form.save()
-                return redirect('index')
+                context = {
+                    "message" : "회원가입이 완료되었습니다.\n로그인해 주세요."
+                }
+                return render(request, 'index.html', context)
 
             else :
                 # 인덱스

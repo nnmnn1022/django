@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import PostBaseForm, PostCreateForm, PostDetailForm
 User = get_user_model()
 
-# Create your views here.
+# 인덱스 (사용자가 처음 들어왔을 때 보는 부분)
 def index(request):
     post_list = Post.objects.all().order_by('-created_at')
     context = {
@@ -15,7 +15,7 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-
+# 글 목록
 def post_list_view(request):
     post_list = Post.objects.all()
     # Post.writer가 현재 로그인인 것만 조회
@@ -26,6 +26,7 @@ def post_list_view(request):
     }
     return render(request, 'posts/post_list.html', context)
 
+# 글 상세
 def post_detail_view(request, id):
     try :
         post = Post.objects.get(id=id)
@@ -39,6 +40,7 @@ def post_detail_view(request, id):
     return render(request, 'posts/post_detail.html', context)
 
 # 로그인을 했을 때만 처리하는 함수라는 어노테이션
+# 글 작성
 @login_required
 def post_create_view(request):
     # get으로 들어오면 폼을 보여주게 함
@@ -54,7 +56,8 @@ def post_create_view(request):
         )
         return redirect('index')
 
-
+# 글 작성 (폼을 사용한 작업)
+@login_required
 def post_create_form_view(request):
     # get으로 들어오면 폼을 보여주게 함
     if request.method == 'GET' :
@@ -82,7 +85,7 @@ def post_create_form_view(request):
             return redirect('posts:post-create')
         return redirect('index')
 
-    
+# 사용자가 로그인 되어 있을 때만, 글 수정 기능
 @login_required
 def post_update_view(request, id):
     # 아래 코드로 우측 코드를 대체할 수 있음 post = Post.objects.get(id=id)
@@ -106,6 +109,7 @@ def post_update_view(request, id):
         post.save()
         return redirect('posts:post-detail', post.id )
 
+# 사용자가 로그인 되어 있을 때만, 글 삭제 기능
 @login_required
 def post_delete_view(request, id):
     post = get_object_or_404(Post,id=id, writer=request.user)
@@ -119,7 +123,16 @@ def post_delete_view(request, id):
     else :
         post.delete()
         return redirect('index')
-    
+
+# 사용자가 로그인 되어 있을 때만, 댓글 달기 기능
+@login_required
+def comment_create(request, id) :
+    if request.method == 'POST' :
+        post = get_object_or_404(Post, pk=id)
+        content = request.POST.get('content')
+        pass
+    else :
+        pass
 
 def url_view(request):
     print('url_view()')
