@@ -38,7 +38,7 @@ urlpatterns = [
     path('support/', include('support.urls', namespace='support')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     # 배포 시 주석 처리
-    # path('__debug__/', include('debug_toolbar.urls')),  
+    path('__debug__/', include('debug_toolbar.urls')),  
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

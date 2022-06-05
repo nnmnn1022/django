@@ -10,6 +10,8 @@ class Post(BaseModel) :
     content = models.TextField(verbose_name='내용')
     view_count = models.IntegerField(verbose_name='조회수', default=0)
     writer = models.ForeignKey(verbose_name='작성자', to=User, on_delete=models.CASCADE, null=True, blank=True)
+    like = models.ManyToManyField(to=User, verbose_name='좋아요', blank=True, related_name='post_like')
+    favorite = models.ManyToManyField(to=User, verbose_name='저장', blank=True, related_name='post_favorite')
 
 class Comment(BaseModel) :
     content = models.TextField(verbose_name='내용')

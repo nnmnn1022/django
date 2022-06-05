@@ -1,7 +1,8 @@
+from csv import writer
 from django.shortcuts import render, redirect, get_object_or_404 # 가져오거나 오류를 만든다
 from django.http import Http404, HttpResponse, JsonResponse
 from django.views.generic import ListView
-from .models import Post
+from .models import Post, Comment
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from .forms import PostBaseForm, PostCreateForm, PostDetailForm
@@ -128,11 +129,37 @@ def post_delete_view(request, id):
 @login_required
 def comment_create(request, id) :
     if request.method == 'POST' :
+        # 게시글 가져오기
         post = get_object_or_404(Post, pk=id)
+        # 댓글 내용 가져오기
         content = request.POST.get('content')
-        pass
-    else :
-        pass
+        
+        if not content :
+            context = {
+                'message' : '댓글을 입력해주세요'
+            }
+            return render(render, 'post:post_list', context)
+        else :
+            Comment.objects.create(
+                post = post,
+                writer = request.user,
+                content = content,
+            )
+    return redirect('index')
+
+# 사용자가 로그인 되어 있을 때만, 좋아요 기능
+@login_required
+def post_like(request, id):
+    # GET 으로 좋아요 반응을 보낸다고 가정하고
+    if request.method == 'GET' :
+        post = request.objects.get(id=id)
+        user = request.user
+        # 좋아요 수를 올린다.
+        if user in post.like.all() :
+            post.like.remove(user)
+        else :
+            post.like.add(user)
+
 
 def url_view(request):
     print('url_view()')

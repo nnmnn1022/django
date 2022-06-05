@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
-from .forms import UserSignupForm
+from .forms import UserSignupForm, UserUpdateForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 
 def signup_view(request) :
     # GET 요청 시 HTML 응답
@@ -58,7 +59,6 @@ def login_view(request) :
             }
             return render(request, 'accounts/login.html', context)
 
-
         # username = request.POST.get('username')
         # if username == '' :
         #     pass
@@ -69,6 +69,23 @@ def login_view(request) :
 
         # user = User.objects.get(username=username)
 
+@login_required
+def update_view(request) :
+    # GET
+    if request.method == 'GET' :
+        context = {
+            'form' : UserUpdateForm(instance = request.user) # 유저 정보를 인스턴스로 같이 넘김
+        }
+        return render(request, 'accounts/update.html', context)
+
+    # POST
+    else :
+        form = UserUpdateForm(request.POST, instance = request.user)
+        if form.is_valid() :
+            form.save()
+            return redirect('index')
+
+@login_required
 def logout_view(request) :
     # 데이터 유효성 검사
     if request.user.is_authenticated :

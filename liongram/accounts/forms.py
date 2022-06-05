@@ -1,7 +1,7 @@
 from tabnanny import verbose
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 class UserBaseForm(forms.ModelForm) :
     class Meta :
@@ -20,4 +20,10 @@ class UserSignupForm(UserCreationForm) :
         model = get_user_model()
         fields = ['username', 'email', 'profile_image']
 
+
+class UserUpdateForm(UserChangeForm) :
+    class Meta(UserChangeForm.Meta) :
+        model = get_user_model()
+        # 모두 수정할 필요가 없으므로 수정할 것들을 제한
+        fields = ['username', 'email', 'phone', 'profile_image']
 
