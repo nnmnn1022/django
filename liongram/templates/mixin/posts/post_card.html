@@ -3,7 +3,7 @@
     <div class="card__header">
         <div class = card__user-image>
             {% if post.writer.profile_image != Null %}
-                <img class="card__user-image" src="{{ post.writer.profile_image }}"/>
+                <img class="card__user-image" src="{{ post.post_writer.profile_image }}"/>
             {% else %}
                 <img class="card__user-image" src="http://via.placeholder.com/32x32"/>
             {% endif %}

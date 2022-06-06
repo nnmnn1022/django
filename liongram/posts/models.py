@@ -9,7 +9,7 @@ class Post(BaseModel) :
     image = models.ImageField(verbose_name='이미지', null=True, blank=True)
     content = models.TextField(verbose_name='내용')
     view_count = models.IntegerField(verbose_name='조회수', default=0)
-    writer = models.ForeignKey(verbose_name='작성자', to=User, on_delete=models.CASCADE, null=True, blank=True)
+    writer = models.ForeignKey(verbose_name='작성자', to=User, on_delete=models.CASCADE, null=True, blank=True, related_name='post_writer')
     like = models.ManyToManyField(to=User, verbose_name='좋아요', blank=True, related_name='post_like')
     favorite = models.ManyToManyField(to=User, verbose_name='저장', blank=True, related_name='post_favorite')
 
