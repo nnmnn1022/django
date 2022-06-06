@@ -80,7 +80,7 @@ def update_view(request) :
 
     # POST
     else :
-        form = UserUpdateForm(request.POST, instance = request.user)
+        form = UserUpdateForm(request.POST, request.FILES, instance = request.user)
         if form.is_valid() :
             form.save()
             return redirect('index')
